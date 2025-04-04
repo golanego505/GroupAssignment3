@@ -1,10 +1,22 @@
 package mylittlemozart;
 
-public class Main {
+public class MyLittleMozartMain {
 
 	public static void main(String[] args) {
-		System.out.println("Main");
-
+		
+		boolean testResult;
+		
+		testResult = TestClass.testParse();
+		
+		if(testResult)
+		{
+			System.out.println("File Parsed Successfully.");
+		}
+		else
+		{
+			System.out.println("Test Failed.");
+		}
+		System.out.println("Tests finished...");
 	}
 
 }
