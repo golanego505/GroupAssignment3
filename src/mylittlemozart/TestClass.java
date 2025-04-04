@@ -18,8 +18,8 @@ public class TestClass {
 	{
 		try 
 		{
-			List<MidiEventData> events = CSVParser.parseCsv("mystery_song.csv");
-			if(events.size() == CSVParser.lineCount)
+			List<MidiEventData> events = MidiCsvParser.parseCsv("mystery_song.csv");
+			if(events.size() == MidiCsvParser.lineCount)
 			{
 				//Midi objects match each note in the file
 				return true;

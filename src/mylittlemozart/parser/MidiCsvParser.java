@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sound.midi.*;
 
-public class CSVParser {
+public class MidiCsvParser {
+	
+	public static int lineCount = 0; //debug var, count # of lines in the csv file
 	
 	public static List<MidiEventData> parseCsv(String filepath) throws IOException
 	{
@@ -15,9 +17,8 @@ public class CSVParser {
 		BufferedReader reader = new BufferedReader(new FileReader(filepath));
 		String line;
 		int noteOnOff;
-		//startEndTick(0), Note on off(1), channel(2), note(3), velocity(4) , instrument(5)
 		
-		int count = 0; //debug var, count # of lines in the csv file
+		//startEndTick(0), Note on off(1), channel(2), note(3), velocity(4) , instrument(5)
 		while((line = reader.readLine()) != null)
 		{
 			String[] parts = line.trim().split(",");
@@ -44,10 +45,10 @@ public class CSVParser {
 			}
 			
 			midiEvents.add(new MidiEventData(startEndTick, velocity, note, channel, instrument, noteOnOff));
-			count++;
+			lineCount++;
 		}
 		
-		System.out.println("Number of lines in CSV file: " + count); //debug code
+		//System.out.println("Number of lines in CSV file: " + count); //debug code
 		reader.close();
 		return midiEvents;
 	}
