@@ -28,7 +28,7 @@ public class MidiCsvParser {
 			}
 			
 			int startEndTick = Integer.parseInt(parts[0].trim());
-			String noteOnOffStr = parts[1];
+			String noteOnOffStr = parts[1].trim();
 			int channel = Integer.parseInt(parts[2].trim());
 			int note = Integer.parseInt(parts[3].trim());
 			int velocity = Integer.parseInt(parts[4].trim());
