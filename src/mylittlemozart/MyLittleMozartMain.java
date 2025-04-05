@@ -8,15 +8,19 @@ import javax.sound.midi.Sequencer;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
-import mylittlemozart.factory.MidiEventFactory;
-import mylittlemozart.parser.MidiCsvParser;
-import mylittlemozart.parser.MidiEventData;
+import mylittlemozart.factory.*;
+//import mylittlemozart.factory.MidiEventFactoryAbstract;
+//import mylittlemozart.factory.StandardMidiEventFactoryAbstract;
+import mylittlemozart.parser.*;
+import mylittlemozart.strategies.instrument.*;
+import mylittlemozart.strategies.pitch.*;
 
 public class MyLittleMozartMain {
 
 	public static void main(String[] args) {
         try {
-            List<MidiEventData> midiEvents = MidiCsvParser.parseCsv("./files/mystery_song.csv");
+        	
+            List<MidiEventData> midiEvents = MidiCsvParser.parseCsv("src/files/mystery_song.csv");
 
             Sequence sequence = new Sequence(Sequence.PPQ, 384);
             Track track = sequence.createTrack();
@@ -43,18 +47,13 @@ public class MyLittleMozartMain {
                 modifiedNote = pitchStrategy.modifyPitch(modifiedNote); // apply again if desired
 
                 if (event.getNoteOnOff() == ShortMessage.NOTE_ON) {
-                    track.add(factory.createNoteOn(
-                            event.getStartEndTick(),
+                    track.add(factory.createNoteOn(event.getStartEndTick(),
                             modifiedNote,
                             event.getVelocity(),
                             event.getChannel()
                     ));
                 } else {
-                    track.add(factory.createNoteOff(
-                            event.getStartEndTick(),
-                            modifiedNote,
-                            event.getChannel()
-                    ));
+                    track.add(factory.createNoteOff(event.getStartEndTick(), modifiedNote, event.getChannel()));
                 }
             }
 
