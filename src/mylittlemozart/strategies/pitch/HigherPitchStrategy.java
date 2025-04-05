@@ -1,4 +1,4 @@
-package mylittlemozart.strategies;
+package mylittlemozart.strategies.pitch;
 
 public class HigherPitchStrategy implements PitchStrategy{
 	
