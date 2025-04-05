@@ -14,10 +14,10 @@ public class StaccatoMidiEventFactory implements MidiEventFactory {
 	}
 
 	@Override
-	public MidiEvent createNoteOff(int tick, int note, int channel, int duration) throws InvalidMidiDataException {
+	public MidiEvent createNoteOff(int tick, int note, int channel) throws InvalidMidiDataException {
 		 ShortMessage message = new ShortMessage();
-		    message.setMessage(ShortMessage.NOTE_OFF, channel, note, 0);
-		    return new MidiEvent(message, tick + duration - 120);
+		 message.setMessage(ShortMessage.NOTE_OFF, channel, note, 0);
+		 return new MidiEvent(message, tick - 120);
 	}
 
 }
