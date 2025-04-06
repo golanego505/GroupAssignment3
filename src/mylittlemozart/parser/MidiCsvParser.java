@@ -8,7 +8,7 @@ import java.util.List;
 import javax.sound.midi.*;
 /**
  * A Utility class used for parsing through Midi event formatted CSV files.
- * Uses static variables and methods
+ * Uses static variables and methods.
  */
 public class MidiCsvParser {
 	
