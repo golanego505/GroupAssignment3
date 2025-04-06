@@ -6,11 +6,33 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sound.midi.*;
-
+/**
+ * A Utility class used for parsing through Midi event formatted CSV files.
+ * Uses static variables and methods.
+ */
 public class MidiCsvParser {
 	
-	public static int lineCount = 0; //debug var, count # of lines in the csv file
+	/**
+	 * Used for debugging. Counts the number of lines in the file
+	 */
+	public static int lineCount = 0;
 	
+	/**
+	 * Parses through a CSV file and creates new MidiEventData objects from each line in the file.
+	 * The method then populates a list of MidiEventData objects representing MIDI events
+	 * Also increments the lineCount static variable on each successfully parsed line. 
+	 * 
+	 * The expected format of the file is:
+	 * startEndTick, Note_on_c/Note_off_c, channel, note, velocity, instrument
+	 * 
+	 * Lines that do not match the expected format are skipped.
+	 * 
+	 * @param filepath the relative or absolute path to the CSV file
+	 * @return a list of MidiEventData objects
+	 * @throws IOException
+	 * 
+	 * @see MidiEventData
+	 */
 	public static List<MidiEventData> parseCsv(String filepath) throws IOException
 	{
 		List<MidiEventData> midiEvents = new ArrayList<>();
@@ -28,7 +50,7 @@ public class MidiCsvParser {
 			}
 			
 			int startEndTick = Integer.parseInt(parts[0].trim());
-			String noteOnOffStr = parts[1];
+			String noteOnOffStr = parts[1].trim();
 			int channel = Integer.parseInt(parts[2].trim());
 			int note = Integer.parseInt(parts[3].trim());
 			int velocity = Integer.parseInt(parts[4].trim());

@@ -9,26 +9,32 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
 import mylittlemozart.factory.*;
-//import mylittlemozart.factory.MidiEventFactoryAbstract;
-//import mylittlemozart.factory.StandardMidiEventFactoryAbstract;
 import mylittlemozart.parser.*;
 import mylittlemozart.strategies.instrument.*;
 import mylittlemozart.strategies.pitch.*;
 
 public class MyLittleMozartMain {
 
+	/**
+	 * The main entry point for the Group Assignment 3 application.
+	 * 
+	 * This method reads a MIDI-formatted CSV file, applies a type of factory to create specific sounds, and applies pitch and instrument
+	 * strategies.
+	 * The method then uses the Java's built in MIDI sequence to generate and play a MIDI sequence.
+	 */
 	public static void main(String[] args) {
         try {
         	
-            List<MidiEventData> midiEvents = MidiCsvParser.parseCsv("src/files/mystery_song.csv");
+            List<MidiEventData> midiEvents = MidiCsvParser.parseCsv("./files/mystery_song.csv");
 
             Sequence sequence = new Sequence(Sequence.PPQ, 384);
             Track track = sequence.createTrack();
 
             // Choose one of these factories
-            MidiEventFactoryAbstract factoryAbstract = new StandardMidiEventFactoryAbstract();
-            // factoryAbstract = new LegatoMidiEventFactoryAbstract();
-            // factoryAbstract = new StaccatoMidiEventFactoryAbstract();
+            MidiEventFactoryAbstract factoryAbstract; 
+            factoryAbstract = new StandardMidiEventFactoryAbstract();
+            //factoryAbstract = new LegatoMidiEventFactoryAbstract();
+            //factoryAbstract = new StaccatoMidiEventFactoryAbstract();
 
             MidiEventFactory factory = factoryAbstract.createFactory();
 
@@ -41,6 +47,7 @@ public class MyLittleMozartMain {
 
             // Choose a pitch strategy
             PitchStrategy pitchStrategy = new HigherPitchStrategy();
+            pitchStrategy = new LowerPitchStrategy();
 
             for (MidiEventData event : midiEvents) {
                 int modifiedNote = pitchStrategy.modifyPitch(event.getNote());
@@ -74,6 +81,7 @@ public class MyLittleMozartMain {
             e.printStackTrace();
         }
 	}
+	// Testing case from TestClass
 	//	boolean testResult;
 	//	
 	//	testResult = TestClass.testParse();
