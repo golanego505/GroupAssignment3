@@ -41,9 +41,13 @@ public class MyLittleMozartMain {
             // Choose and apply instrument strategies per channel
             InstrumentStrategy instrumentStrategy = new ElectricBassGuitarStrategy();
             instrumentStrategy.applyInstrument(track, 0);
+            instrumentStrategy.applyInstrument(track, 1);
+            
 
             instrumentStrategy = new TrumpetStrategy();
-            instrumentStrategy.applyInstrument(track, 1);
+            instrumentStrategy.applyInstrument(track, 2);
+            instrumentStrategy.applyInstrument(track, 3);
+            instrumentStrategy.applyInstrument(track, 4);
 
             // Choose a pitch strategy
             PitchStrategy pitchStrategy = new HigherPitchStrategy();
